@@ -40,13 +40,42 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var supertest_1 = __importDefault(require("supertest"));
-var index_1 = __importDefault(require("../../../routes/index"));
+var index_1 = __importDefault(require("../../../index"));
 var request = (0, supertest_1.default)(index_1.default);
-describe("Test image processing endpoint response", function () {
-    it("Test main route ", function () { return __awaiter(void 0, void 0, void 0, function () {
+describe("Test Image Processing End Point", function () {
+    it("Test Image Resize Route", function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, request.get('/').expect(200)];
+                case 0: return [4 /*yield*/, request
+                        .get("/api/resizeImage")
+                        .query({ image: "image1", width: "250", height: "250" })
+                        .expect(200)];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    }); });
+    it("Test Image Resize without parameters ", function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, request
+                        .get("/api/resizeImage")
+                        .query({ image: "image1", width: "250" })
+                        .expect(400)];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    }); });
+    it("Test Image Not Found", function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, request
+                        .get("/api/resizeImage")
+                        .query({ image: "myImg", width: "250", height: "250" })
+                        .expect(404)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];

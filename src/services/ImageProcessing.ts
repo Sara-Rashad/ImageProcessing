@@ -7,13 +7,11 @@ const resize = async (
   width: number,
   height: number
 ) => {
-    //search for image in the cache
-    let isResized=fs.existsSync(distUrl);
-    if(!isResized){
-     await sharp(imageUrl).resize(width,height)
-      .toFile(distUrl);
-    }
-  
+  //search for image in the cache
+  let isResized = fs.existsSync(distUrl);
+  if (!isResized) {
+    await sharp(imageUrl).resize(width, height).toFile(distUrl);
+  }
 };
 
 export default resize;

@@ -48,8 +48,7 @@ var resize = function (imageUrl, distUrl, width, height) { return __awaiter(void
             case 0:
                 isResized = fs_1.default.existsSync(distUrl);
                 if (!!isResized) return [3 /*break*/, 2];
-                return [4 /*yield*/, (0, sharp_1.default)(imageUrl).resize(width, height)
-                        .toFile(distUrl)];
+                return [4 /*yield*/, (0, sharp_1.default)(imageUrl).resize(width, height).toFile(distUrl)];
             case 1:
                 _a.sent();
                 _a.label = 2;

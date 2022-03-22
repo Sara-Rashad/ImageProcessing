@@ -42,33 +42,39 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var ImageProcessing_1 = __importDefault(require("../../services/ImageProcessing"));
 var path_1 = __importDefault(require("path"));
+var fs_1 = require("fs");
 var resizeImageRoute = express_1.default.Router();
 resizeImageRoute.get("/", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var imageName, width, height, imgUrl, distUrl, ex_1;
+    var imageName, width, height, imgUrl, distUrl, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 4, , 5]);
                 imageName = req.query.image;
                 width = parseInt(req.query.width);
                 height = parseInt(req.query.height);
-                if (!(imageName && width && height)) return [3 /*break*/, 2];
+                if (!(imageName && width && height)) return [3 /*break*/, 6];
                 imgUrl = "".concat(__dirname, "/../../../resources/images/").concat(imageName, ".jpg");
                 distUrl = "".concat(__dirname, "/../../../resources/resizedImages/").concat(imageName, "_").concat(width, "_").concat(height, ".jpg");
-                return [4 /*yield*/, (0, ImageProcessing_1.default)(imgUrl, distUrl, width, height)];
+                _a.label = 1;
             case 1:
-                _a.sent();
-                res.sendFile(path_1.default.resolve(distUrl));
-                return [3 /*break*/, 3];
+                _a.trys.push([1, 4, , 5]);
+                return [4 /*yield*/, fs_1.promises.access(imgUrl, fs_1.constants.F_OK)];
             case 2:
-                res.status(400).send("Invalid Parameters");
-                _a.label = 3;
-            case 3: return [3 /*break*/, 5];
-            case 4:
-                ex_1 = _a.sent();
-                res.status(400).send("Invalid Resizing Operation");
+                _a.sent();
+                return [4 /*yield*/, (0, ImageProcessing_1.default)(imgUrl, distUrl, width, height)];
+            case 3:
+                _a.sent();
+                res.status(200).sendFile(path_1.default.resolve(distUrl));
                 return [3 /*break*/, 5];
-            case 5: return [2 /*return*/];
+            case 4:
+                e_1 = _a.sent();
+                res.status(404).send("Image Not Found !");
+                return [3 /*break*/, 5];
+            case 5: return [3 /*break*/, 7];
+            case 6:
+                res.status(400).send("Invalid Parameters");
+                _a.label = 7;
+            case 7: return [2 /*return*/];
         }
     });
 }); });

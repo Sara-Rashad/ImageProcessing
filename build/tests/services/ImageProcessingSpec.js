@@ -51,10 +51,10 @@ describe("Test Image Processing service", function () {
                     height = 250;
                     imgUrl = "".concat(__dirname, "/../../../resources/images/image1.jpg");
                     distUrl = "".concat(__dirname, "/../../../resources/resizedImages/image1_").concat(width, "_").concat(height, ".jpg");
-                    //check if image exist 
+                    //check if image exist
                     return [4 /*yield*/, fs_1.promises.access(imgUrl)];
                 case 1:
-                    //check if image exist 
+                    //check if image exist
                     _a.sent();
                     return [4 /*yield*/, (0, ImageProcessing_1.default)(imgUrl, distUrl, width, height)];
                 case 2:
