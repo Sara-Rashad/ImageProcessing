@@ -5,15 +5,15 @@ import { promises as fs, constants } from "fs";
 
 const resizeImageRoute = express.Router();
 
-resizeImageRoute.get("/", async (req, res) => {
+resizeImageRoute.get("/", async (req:express.Request, res:express.Response):Promise<void> => {
   //read url params
-  let imageName = req.query.image;
-  let width = parseInt(req.query.width as string);
-  let height = parseInt(req.query.height as string);
+  const imageName = req.query.image;
+  const width = parseInt(req.query.width as string);
+  const height = parseInt(req.query.height as string);
   if (imageName && width && height) {
     //call resize service
-    let imgUrl = `${__dirname}/../../../resources/images/${imageName}.jpg`;
-    let distUrl = `${__dirname}/../../../resources/resizedImages/${imageName}_${width}_${height}.jpg`;
+    const imgUrl = `${__dirname}/../../../resources/images/${imageName}.jpg`;
+    const distUrl = `${__dirname}/../../../resources/resizedImages/${imageName}_${width}_${height}.jpg`;
     try {
       await fs.access(imgUrl, constants.F_OK);
       await resize(imgUrl, distUrl, width, height);
