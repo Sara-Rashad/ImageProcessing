@@ -43,9 +43,9 @@ var ImageProcessing_1 = __importDefault(require("../../services/ImageProcessing"
 var fs_1 = require("fs");
 describe("Test Image Processing service", function () {
     it("Expect resize service to resize certain image and save it in the output folder", function () { return __awaiter(void 0, void 0, void 0, function () {
-        var width, height, imgUrl, distUrl;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var width, height, imgUrl, distUrl, _a;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0:
                     width = 250;
                     height = 250;
@@ -55,20 +55,21 @@ describe("Test Image Processing service", function () {
                     return [4 /*yield*/, fs_1.promises.access(imgUrl)];
                 case 1:
                     //check if image exist
-                    _a.sent();
+                    _b.sent();
                     return [4 /*yield*/, (0, ImageProcessing_1.default)(imgUrl, distUrl, width, height)];
                 case 2:
-                    _a.sent();
+                    _b.sent();
                     //check if resized image exist
+                    _a = expect;
                     return [4 /*yield*/, fs_1.promises.access(distUrl)];
                 case 3:
                     //check if resized image exist
-                    _a.sent();
+                    _a.apply(void 0, [_b.sent()]);
                     //remove resized image
                     return [4 /*yield*/, fs_1.promises.unlink(distUrl)];
                 case 4:
                     //remove resized image
-                    _a.sent();
+                    _b.sent();
                     return [2 /*return*/];
             }
         });

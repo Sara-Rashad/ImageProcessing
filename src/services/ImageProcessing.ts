@@ -6,9 +6,9 @@ const resize = async (
   distUrl: string,
   width: number,
   height: number
-) => {
+) :Promise<void>=> {
   //search for image in the cache
-  let isResized = fs.existsSync(distUrl);
+  const isResized = fs.existsSync(distUrl);
   if (!isResized) {
     await sharp(imageUrl).resize(width, height).toFile(distUrl);
   }
