@@ -3,7 +3,7 @@
 Resizing an existing image with certain width and height with caching ability.
 
 ## Endpoint Accss
-http://localhost:3000/api/resizeImage?image={imageName}&with={width}&height={height}
+http://localhost:3000/api/resizeImage?image={imageName}&width={width}&height={height}
 
 ## Scripts 
 ### Server Start
